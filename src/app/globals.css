@@ -1,115 +1,99 @@
 @import "tailwindcss";
 
-:root {
-  --wiki-bg: #ffffff;
-  --wiki-bg-subtle: #f8f9fa;
-  --wiki-text: #202122;
-  --wiki-text-subtle: #54595d;
-  --wiki-link: #0645ad;
-  --wiki-link-visited: #0b0080;
-  --wiki-link-new: #ba0000;
-  --wiki-border: #a2a9b1;
-  --wiki-border-subtle: #eaecf0;
-  --wiki-serif: "Linux Libertine", "Georgia", "Times", serif;
-  --wiki-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+/* `static` keeps every token as a CSS variable, since the rules below use var() directly. */
+@theme static {
+  --color-wiki-bg: #ffffff;
+  --color-wiki-subtle: #f8f9fa;
+  --color-wiki-head: #eaecf0;
+  --color-wiki-text: #202122;
+  --color-wiki-muted: #54595d;
+  --color-wiki-link: #0645ad;
+  --color-wiki-visited: #0b0080;
+  --color-wiki-border: #a2a9b1;
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Linux Libertine", Georgia, Times, serif;
+  --text-wiki-sm: 0.85rem;
 }
 
-@theme inline {
-  --color-wiki-bg: var(--wiki-bg);
-  --color-wiki-subtle: var(--wiki-bg-subtle);
-  --color-wiki-text: var(--wiki-text);
-  --color-wiki-muted: var(--wiki-text-subtle);
-  --color-wiki-link: var(--wiki-link);
-  --color-wiki-border: var(--wiki-border);
-  --font-sans: var(--wiki-sans);
-  --font-serif: var(--wiki-serif);
+/* Custom CSS lives in layers so Tailwind utilities can still override it. */
+@layer base {
+  body {
+    background: var(--color-wiki-bg);
+    color: var(--color-wiki-text);
+    line-height: 1.65;
+  }
+  a {
+    color: var(--color-wiki-link);
+    text-decoration: none;
+  }
+  a:visited {
+    color: var(--color-wiki-visited);
+  }
+  a:hover {
+    text-decoration: underline;
+  }
 }
 
-body {
-  background: var(--wiki-bg);
-  color: var(--wiki-text);
-  font-family: var(--wiki-sans);
-  font-size: 1rem;
-  line-height: 1.65;
-}
+@layer components {
+  .wiki-container {
+    margin-inline: auto;
+    max-width: 48rem;
+    padding-inline: 1rem;
+  }
 
-a {
-  color: var(--wiki-link);
-  text-decoration: none;
-}
-a:visited {
-  color: var(--wiki-link-visited);
-}
-a:hover {
-  text-decoration: underline;
-}
-a.new {
-  color: var(--wiki-link-new);
-}
-
-/* Article body */
-.wiki-body h1,
-.wiki-body h2 {
-  font-family: var(--wiki-serif);
-  font-weight: normal;
-  border-bottom: 1px solid var(--wiki-border);
-  line-height: 1.3;
-  margin: 1.5em 0 0.25em;
-  padding: 0;
-}
-.wiki-body h1 {
-  font-size: 1.8em;
-  margin-top: 0;
-}
-.wiki-body h2 {
-  font-size: 1.5em;
-}
-.wiki-body h3,
-.wiki-body h4 {
-  font-weight: bold;
-  margin: 1em 0 0.3em;
-}
-.wiki-body h3 {
-  font-size: 1.2em;
-}
-.wiki-body p {
-  margin: 0.5em 0 1em;
-}
-.wiki-body ul {
-  list-style: disc;
-  margin: 0.3em 0 0.5em 1.6em;
-}
-.wiki-body ol {
-  list-style: decimal;
-  margin: 0.3em 0 0.5em 3.2em;
-}
-.wiki-body li {
-  margin-bottom: 0.1em;
-}
-.wiki-body table {
-  background: var(--wiki-bg-subtle);
-  border: 1px solid var(--wiki-border);
-  border-collapse: collapse;
-  margin: 1em 0;
-}
-.wiki-body th,
-.wiki-body td {
-  border: 1px solid var(--wiki-border);
-  padding: 0.2em 0.5em;
-}
-.wiki-body th {
-  background: #eaecf0;
-  text-align: center;
-}
-.wiki-body sup {
-  font-size: 0.75em;
-  line-height: 1;
-}
-.wiki-body [data-footnotes] {
-  border-top: 1px solid var(--wiki-border);
-  font-size: 0.9em;
-  margin-top: 2em;
-}
-.wiki-body [data-footnotes] > h2 {
-  border-bottom: 1px solid var(--wiki-border);
+  /* Rendered article body (MDX only, so the infobox and TOC are unaffected). */
+  .wiki-body h2 {
+    font-family: var(--font-serif);
+    font-size: 1.5em;
+    font-weight: normal;
+    line-height: 1.3;
+    border-bottom: 1px solid var(--color-wiki-border);
+    margin: 1.5em 0 0.25em;
+  }
+  .wiki-body h3,
+  .wiki-body h4 {
+    font-weight: bold;
+    margin: 1em 0 0.3em;
+  }
+  .wiki-body h3 {
+    font-size: 1.2em;
+  }
+  .wiki-body p {
+    margin: 0.5em 0 1em;
+  }
+  .wiki-body ul {
+    list-style: disc;
+    margin: 0.3em 0 0.5em 1.6em;
+  }
+  .wiki-body ol {
+    list-style: decimal;
+    margin: 0.3em 0 0.5em 3.2em;
+  }
+  .wiki-body li {
+    margin-bottom: 0.1em;
+  }
+  .wiki-body table {
+    background: var(--color-wiki-subtle);
+    border: 1px solid var(--color-wiki-border);
+    border-collapse: collapse;
+    margin: 1em 0;
+  }
+  .wiki-body th,
+  .wiki-body td {
+    border: 1px solid var(--color-wiki-border);
+    padding: 0.2em 0.5em;
+  }
+  .wiki-body th {
+    background: var(--color-wiki-head);
+    text-align: center;
+  }
+  .wiki-body sup {
+    font-size: 0.75em;
+    line-height: 1;
+  }
+  .wiki-body [data-footnotes] {
+    border-top: 1px solid var(--color-wiki-border);
+    font-size: 0.9em;
+    margin-top: 2em;
+  }
 }

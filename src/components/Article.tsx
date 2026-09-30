@@ -20,18 +20,22 @@ const components = {
 export function Article({ page }: { page: WikiPage }) {
   const { frontmatter: fm } = page;
   return (
-    <article className="wiki-body">
-      <h1>{fm.title}</h1>
+    <article>
+      <h1 className="mb-2 border-b border-wiki-border pb-1 font-serif text-3xl leading-tight font-normal">
+        {fm.title}
+      </h1>
       {fm.hatnote && <Hatnote>{fm.hatnote}</Hatnote>}
       {fm.infobox && <Infobox data={fm.infobox} />}
       <TableOfContents headings={page.headings} />
-      <MDXRemote
-        source={page.body}
-        components={components}
-        options={{ mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [rehypeSlug] } }}
-      />
+      <div className="wiki-body">
+        <MDXRemote
+          source={page.body}
+          components={components}
+          options={{ mdxOptions: { remarkPlugins: [remarkGfm], rehypePlugins: [rehypeSlug] } }}
+        />
+      </div>
       {fm.categories && fm.categories.length > 0 && (
-        <div className="clear-both mt-8 border-t border-wiki-border pt-2 text-[0.85rem] text-wiki-muted">
+        <div className="clear-both mt-8 border-t border-wiki-border pt-2 text-wiki-sm text-wiki-muted">
           <strong>Categorías:</strong> {fm.categories.join(" | ")}
         </div>
       )}

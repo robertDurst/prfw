@@ -10,17 +10,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es" className="h-full antialiased">
-      <body className="min-h-full">
+    <html lang="es" className="antialiased">
+      <body>
         <header className="border-b border-wiki-border">
-          <div className="mx-auto max-w-3xl px-4 py-3">
+          <div className="wiki-container py-3">
             <Link href="/" className="font-serif text-xl text-wiki-text hover:no-underline">
               La Selección Wiki
             </Link>
           </div>
         </header>
-        <main className="mx-auto max-w-3xl px-4 py-6">{children}</main>
-        <footer className="mx-auto max-w-3xl border-t border-wiki-border px-4 py-4 text-xs text-wiki-muted">
+        <main className="wiki-container py-6">{children}</main>
+        <footer className="wiki-container border-t border-wiki-border py-4 text-xs text-wiki-muted">
           El texto derivado de Wikipedia está disponible bajo la licencia Creative Commons
           Atribución-CompartirIgual 4.0.
         </footer>
