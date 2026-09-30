@@ -9,9 +9,14 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "github-slugger": "^2.0.0",
+    "gray-matter": "^4.0.3",
     "next": "latest",
+    "next-mdx-remote": "^6.0.0",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "latest",
